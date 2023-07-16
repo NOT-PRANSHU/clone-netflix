@@ -74,30 +74,12 @@ function Modal() {
   }, [movie])
 
   // Find all the movies in the user's list
-  useEffect(() => {
-    if (user) {
-      return onSnapshot(
-        collection(db, 'customers', user.uid, 'myList'),
-        (snapshot) => setMovies(snapshot.docs)
-      )
-    }
-  }, [db, movie?.id])
 
-  // Check if the movie is already in the user's list
-  useEffect(
-    () =>
-      setAddedToList(
-        movies.findIndex((result) => result.data().id === movie?.id) !== -1
-      ),
-    [movies]
-  )
+
 
   const handleList = async () => {
     if (addedToList) {
-      await deleteDoc(
-        doc(db, 'customers', user!.uid, 'myList', movie?.id.toString()!)
-      )
-
+       setAddedToList(!addedToList)
       toast(
         `${movie?.title || movie?.original_name} has been removed from My List`,
         {
@@ -106,11 +88,7 @@ function Modal() {
         }
       )
     } else {
-      await setDoc(
-        doc(db, 'customers', user!.uid, 'myList', movie?.id.toString()!),
-        { ...movie }
-      )
-
+       setAddedToList(!addedToList)
       toast(
         `${movie?.title || movie?.original_name} has been added to My List`,
         {
@@ -143,6 +121,7 @@ function Modal() {
         </button>
 
         <div className="relative pt-[56.25%]">
+
           <ReactPlayer
             url={`https://www.youtube.com/watch?v=${trailer}`}
             width="100%"
@@ -158,7 +137,7 @@ function Modal() {
                 Play
               </button>
 
-              <button className="modalButton" onClick={handleList}>
+              <button className="modalButton" onClick= {handleList} >
                 {addedToList ? (
                   <CheckIcon className="h-7 w-7" />
                 ) : (

@@ -32,6 +32,7 @@ function Header() {
           width={100}
           height={100}
           className="cursor-pointer object-contain"
+          alt=""
         />
 
         <BasicMenu />
@@ -52,8 +53,8 @@ function Header() {
         <Link href="/account">
           <img
             src="https://rb.gy/g1pwyx"
-            alt=""
             className="cursor-pointer rounded"
+            alt=""
           />
         </Link>
       </div>

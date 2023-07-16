@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
         setInitialLoading(false)
       }),
-    [auth]
+    [router]
   )
 
   const signUp = async (email: string, password: string) => {
